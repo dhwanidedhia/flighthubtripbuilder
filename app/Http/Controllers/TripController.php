@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Trip;
 use App\Models\Airport;
 use Illuminate\Support\Facades\Cache;
-
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class TripController extends Controller
 {
@@ -94,6 +94,7 @@ class TripController extends Controller
      */
 	public function search(Request $request)
     {
+		//echo "<pre>";print_r($request->all());die;
 		// Validate the search criteria
 		$validator = \Validator::make($request->all(), [
 			'origin' => 'required|string',
@@ -134,36 +135,82 @@ class TripController extends Controller
 			Cache::put($cacheKey, $trips, 60);
 		}
 		
-		// Apply sorting
-		if ($sortBy === 'cost') {
-			$trips = $trips->sortBy(function ($trip) {
-				return $trip['outbound']['price'];
-			});
-		} elseif ($sortBy === 'duration') {
-			$trips = $trips->sortBy(function ($trip) {
-				return $trip['outbound']['duration'];
-			});
-		}
+		// Convert the array into a collection
+		$trips = collect($trips);
 		
+
 		// Apply filtering
+		//Airlines
 		if ($filterAirline) {
 			$trips = $trips->filter(function ($trip) use ($filterAirline) {
-				return $trip['outbound']['airline'] === $filterAirline;
+				$outboundFlight = $trip['outbound'];
+				$inboundFlight = isset($trip['inbound']) ? $trip['inbound'] : null;
+
+				// Check if either the outbound or inbound flight matches the filter airline
+				$outboundMatch = $outboundFlight->airline === $filterAirline;
+				$inboundMatch = $inboundFlight && $inboundFlight->airline === $filterAirline;
+
+				return $outboundMatch || $inboundMatch;
 			});
 		}
 		
+		//Duration
+		// Convert the sorted collection back to an array
+		$trips = $trips->values()->all();
 		if ($filterDuration) {
-			$trips = $trips->filter(function ($trip) use ($filterDuration) {
-				return $trip['outbound']['duration'] <= $filterDuration;
+			$trips = array_filter($trips, function ($trip) use ($filterDuration) {
+				$outboundDuration = $trip['outbound']['duration'];
+				$inboundDuration = isset($trip['inbound']) ? $trip['inbound']['duration'] : 0;
+				$totalDuration = $outboundDuration + $inboundDuration;
+				return $totalDuration <= $filterDuration;
 			});
 		}
 
 		if ($filterCost) {
-			$trips = $trips->filter(function ($trip) use ($filterCost) {
-				return $trip['outbound']['price'] <= $filterCost;
+			$trips = array_filter($trips, function ($trip) use ($filterCost) {
+				$outboundPrice = $trip['outbound']['price'];
+				$inboundPrice = isset($trip['inbound']) ? $trip['inbound']['price'] : 0;
+				$totalCost = $outboundPrice + $inboundPrice;
+				return $totalCost <= $filterCost;
 			});
 		}
+		
+		//Cost
+		// Convert the array into a collection
+		$trips = collect($trips);
+		//sort by price or duration
+		if ($sortBy === 'cost') {
+			$trips = $trips->sortBy(function ($trip) {
+				return $trip['outbound']->price + (isset($trip['inbound']) ? $trip['inbound']->price : 0);
+			});
+		} elseif ($sortBy === 'duration') {
+			$trips = $trips->sortBy(function ($trip) {
+				return $trip['outbound']->duration + (isset($trip['inbound']) ? $trip['inbound']->duration : 0);
+			});
+		}
+		
+		// Convert the collection back to an array
+		$trips = $trips->values()->all();
 
+		//Pagination
+		// Convert the array into a collection
+		$trips = collect($trips);
+
+		// Paginate the trip results
+		$perPage = $request->input('per_page', 10); // Number of trips per page (default: 10)
+		$currentPage = $request->input('page', 1); // Current page (default: 1)
+		$paginatedTrips = new LengthAwarePaginator(
+			$trips->forPage($currentPage, $perPage),
+			$trips->count(),
+			$perPage,
+			$currentPage,
+			['path' => $request->url(), 'query' => $request->query()]
+		);
+
+		$trips = $paginatedTrips;
+		// Convert the collection back to an array
+		$trips = $trips->values()->all();
+		
 		//Calculate distance
 		if ($tripType === 'roundtrip') {
 			$total_distance = $this->calculateTotalDistance($origin, $destination, true);
@@ -171,6 +218,12 @@ class TripController extends Controller
 			$total_distance = $this->calculateTotalDistance($origin, $destination, false);
 		}
 		
+		
+		
+		$data['trips'] = $trips;
+		$data['total_distance'] = $total_distance;
+		
+		//return view('search',$data);
 		// Return the matching trips as a JSON response
 		return response()->json(['trips' => $trips,'total_distance'=>$total_distance]);
 
@@ -186,6 +239,7 @@ class TripController extends Controller
 	 */
 	private function searchTrips($origin, $destination, $roundtrip = false)
 	{
+		//echo "1";die;
 		// Get the airports based on the origin and destination codes
 		$originAirport = Airport::where('code', $origin)->first();
 		$destinationAirport = Airport::where('code', $destination)->first();

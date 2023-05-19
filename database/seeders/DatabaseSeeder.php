@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Airline;
+use App\Models\Flight;
+use App\Models\Airport;
 
 class DatabaseSeeder extends Seeder
 {
