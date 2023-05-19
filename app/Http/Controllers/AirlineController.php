@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Airline;
+use Illuminate\Support\Facades\Validator;
 
 class AirlineController extends Controller
 {
@@ -36,11 +37,17 @@ class AirlineController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'code' => 'required',
+        $validator = Validator::make($request->all(), [
+            'code' => 'required|unique:airlines',
             'name' => 'required',
         ]);
-
+		
+		if ($validator->fails()) {
+            return redirect('airlines/create')->withErrors($validator)->withInput();
+        }
+		
+		$data = $request->all();
+		
         Airline::create($data);
 
         return redirect()->route('airlines.index')->with('success', 'Airline created successfully.');
@@ -79,11 +86,17 @@ class AirlineController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $data = $request->validate([
-            'code' => 'required',
+        $validator = Validator::make($request->all(), [
+            'code' => 'required|unique:airlines,code,' . $id,
             'name' => 'required',
         ]);
-
+		
+		if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+		
+		$data = $request->all();
+		
         $airline = Airline::findOrFail($id);
         $airline->update($data);
 

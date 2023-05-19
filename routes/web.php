@@ -20,7 +20,7 @@ use App\Http\Controllers\FlightController;
 */
 
 Route::get('/', function () {
-    return view('search');
+    return view('trips.search');
 });
 
 Route::resource('airlines', AirlineController::class);

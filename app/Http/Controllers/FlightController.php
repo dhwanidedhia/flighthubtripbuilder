@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Flight;
+use Illuminate\Support\Facades\Validator;
 
 class FlightController extends Controller
 {
@@ -36,15 +37,21 @@ class FlightController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'airline' => 'required',
-            'number' => 'required',
-            'departure_airport' => 'required',
+        $validator = Validator::make($request->all(), [
+            'airline' => 'required|exists:airlines,code',
+            'number' => 'required|unique:flights,number',
+            'departure_airport' => 'required|exists:airports,code',
             'departure_time' => 'required',
-            'arrival_airport' => 'required',
+            'arrival_airport' => 'required|different:departure_airport|exists:airports,code',
             'duration' => 'required|numeric',
             'price' => 'required|numeric',
         ]);
+		
+		if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+		
+		$data = $request->all();
 
         Flight::create($data);
 
@@ -85,15 +92,21 @@ class FlightController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->validate([
-            'airline' => 'required',
-            'number' => 'required',
-            'departure_airport' => 'required',
+        $validator = Validator::make($request->all(), [
+            'airline' => 'required|exists:airlines,code',
+            'number' => 'required|unique:flights,number,' . $id,
+            'departure_airport' => 'required|exists:airports,code',
             'departure_time' => 'required',
-            'arrival_airport' => 'required',
+            'arrival_airport' => 'required|different:departure_airport|exists:airports,code',
             'duration' => 'required|numeric',
             'price' => 'required|numeric',
         ]);
+		
+		if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+		
+		$data = $request->all();
 
         $flight = Flight::findOrFail($id);
         $flight->update($data);

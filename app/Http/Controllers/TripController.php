@@ -218,12 +218,6 @@ class TripController extends Controller
 			$total_distance = $this->calculateTotalDistance($origin, $destination, false);
 		}
 		
-		
-		
-		$data['trips'] = $trips;
-		$data['total_distance'] = $total_distance;
-		
-		//return view('search',$data);
 		// Return the matching trips as a JSON response
 		return response()->json(['trips' => $trips,'total_distance'=>$total_distance]);
 
@@ -239,7 +233,6 @@ class TripController extends Controller
 	 */
 	private function searchTrips($origin, $destination, $roundtrip = false)
 	{
-		//echo "1";die;
 		// Get the airports based on the origin and destination codes
 		$originAirport = Airport::where('code', $origin)->first();
 		$destinationAirport = Airport::where('code', $destination)->first();

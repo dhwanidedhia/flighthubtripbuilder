@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Airport;
+use Illuminate\Support\Facades\Validator;
 
 class AirportController extends Controller
 {
@@ -36,8 +37,8 @@ class AirportController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'code' => 'required',
+        $validator = Validator::make($request->all(), [
+            'code' => 'required|unique:airports',
             'city_code' => 'required',
             'name' => 'required',
             'city' => 'required',
@@ -47,6 +48,12 @@ class AirportController extends Controller
             'timezone' => 'required',
         ]);
 
+		if ($validator->fails()) {
+            return redirect('airports/create')->withErrors($validator)->withInput();
+        }
+		
+		$data = $request->all();
+		
         Airport::create($data);
 
         return redirect()->route('airports.index')->with('success', 'Airport created successfully.');
@@ -85,8 +92,8 @@ class AirportController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $data = $request->validate([
-            'code' => 'required',
+        $validator = Validator::make($request->all(), [
+            'code' => 'required|unique:airports,code,' . $id,
             'city_code' => 'required',
             'name' => 'required',
             'city' => 'required',
@@ -96,6 +103,12 @@ class AirportController extends Controller
             'timezone' => 'required',
         ]);
 
+		if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+		
+		$data = $request->all();
+		
         $airport = Airport::findOrFail($id);
         $airport->update($data);
 
