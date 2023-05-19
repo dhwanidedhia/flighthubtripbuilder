@@ -23,6 +23,10 @@ class DatabaseSeeder extends Seeder
                 'code' => 'AC',
                 'name' => 'Air Canada',
             ],
+			[
+                'code' => 'F8',
+                'name' => 'Flair Airlines',
+            ],
         ];
 
         foreach ($airlines as $airline) {
@@ -50,7 +54,8 @@ class DatabaseSeeder extends Seeder
                 'latitude' => 49.194698,
                 'longitude' => -123.179192,
                 'timezone' => 'America/Vancouver',
-            ],
+            ]
+			
         ];
 
         foreach ($airports as $airport) {
@@ -76,6 +81,24 @@ class DatabaseSeeder extends Seeder
                 'arrival_airport' => 'YUL',
                 'duration' => 277,
                 'price' => '499.93',
+            ],
+			[
+                'airline' => 'F8',
+                'number' => '103',
+                'departure_airport' => 'YUL',
+                'departure_time' => '22:00',
+                'arrival_airport' => 'YVR',
+                'duration' => 330,
+                'price' => '239.01',
+            ],
+            [
+                'airline' => 'F8',
+                'number' => '102',
+                'departure_airport' => 'YVR',
+                'departure_time' => '13:25',
+                'arrival_airport' => 'YUL',
+                'duration' => 270,
+                'price' => '259.23',
             ],
         ];
 

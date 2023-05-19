@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Airline;
 
 class AirlineController extends Controller
 {
@@ -13,7 +14,8 @@ class AirlineController extends Controller
      */
     public function index()
     {
-        //
+        $airlines = Airline::all();
+        return view('airlines.index', compact('airlines'));
     }
 
     /**
@@ -23,7 +25,7 @@ class AirlineController extends Controller
      */
     public function create()
     {
-        //
+        return view('airlines.create');
     }
 
     /**
@@ -34,7 +36,14 @@ class AirlineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'code' => 'required',
+            'name' => 'required',
+        ]);
+
+        Airline::create($data);
+
+        return redirect()->route('airlines.index')->with('success', 'Airline created successfully.');
     }
 
     /**
@@ -45,7 +54,8 @@ class AirlineController extends Controller
      */
     public function show($id)
     {
-        //
+        $airline = Airline::findOrFail($id);
+        return view('airlines.show', compact('airline'));
     }
 
     /**
@@ -56,7 +66,8 @@ class AirlineController extends Controller
      */
     public function edit($id)
     {
-        //
+        $airline = Airline::findOrFail($id);
+        return view('airlines.edit', compact('airline'));
     }
 
     /**
@@ -68,7 +79,15 @@ class AirlineController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $data = $request->validate([
+            'code' => 'required',
+            'name' => 'required',
+        ]);
+
+        $airline = Airline::findOrFail($id);
+        $airline->update($data);
+
+        return redirect()->route('airlines.index')->with('success', 'Airline updated successfully.');
     }
 
     /**
@@ -79,6 +98,9 @@ class AirlineController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $airline = Airline::findOrFail($id);
+        $airline->delete();
+
+        return redirect()->route('airlines.index')->with('success', 'Airline deleted successfully.');
     }
 }

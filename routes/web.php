@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\TripController;
 
+use App\Http\Controllers\AirlineController;
+use App\Http\Controllers\AirportController;
+use App\Http\Controllers\FlightController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,3 +22,7 @@ use App\Http\Controllers\TripController;
 Route::get('/', function () {
     return view('search');
 });
+
+Route::resource('airlines', AirlineController::class);
+Route::resource('airports', AirportController::class);
+Route::resource('flights', FlightController::class);

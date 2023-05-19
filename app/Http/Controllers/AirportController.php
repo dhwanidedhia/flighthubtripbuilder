@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Airport;
 
 class AirportController extends Controller
 {
@@ -13,7 +14,8 @@ class AirportController extends Controller
      */
     public function index()
     {
-        //
+        $airports = Airport::all();
+        return view('airports.index', compact('airports'));
     }
 
     /**
@@ -23,8 +25,8 @@ class AirportController extends Controller
      */
     public function create()
     {
-        //
-    }
+        return view('airports.create');
+	}
 
     /**
      * Store a newly created resource in storage.
@@ -34,7 +36,20 @@ class AirportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'code' => 'required',
+            'city_code' => 'required',
+            'name' => 'required',
+            'city' => 'required',
+            'country_code' => 'required',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'timezone' => 'required',
+        ]);
+
+        Airport::create($data);
+
+        return redirect()->route('airports.index')->with('success', 'Airport created successfully.');
     }
 
     /**
@@ -45,7 +60,8 @@ class AirportController extends Controller
      */
     public function show($id)
     {
-        //
+        $airport = Airport::findOrFail($id);
+        return view('airports.show', compact('airport'));
     }
 
     /**
@@ -56,7 +72,8 @@ class AirportController extends Controller
      */
     public function edit($id)
     {
-        //
+        $airport = Airport::findOrFail($id);
+        return view('airports.edit', compact('airport'));
     }
 
     /**
@@ -68,7 +85,21 @@ class AirportController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $data = $request->validate([
+            'code' => 'required',
+            'city_code' => 'required',
+            'name' => 'required',
+            'city' => 'required',
+            'country_code' => 'required',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
+            'timezone' => 'required',
+        ]);
+
+        $airport = Airport::findOrFail($id);
+        $airport->update($data);
+
+        return redirect()->route('airports.index')->with('success', 'Airport updated successfully.');
     }
 
     /**
@@ -79,6 +110,9 @@ class AirportController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $airport = Airport::findOrFail($id);
+        $airport->delete();
+
+        return redirect()->route('airports.index')->with('success', 'Airport deleted successfully.');
     }
 }

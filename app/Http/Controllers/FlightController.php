@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Flight;
 
 class FlightController extends Controller
 {
@@ -13,7 +14,8 @@ class FlightController extends Controller
      */
     public function index()
     {
-        //
+        $flights = Flight::all();
+        return view('flights.index', compact('flights'));
     }
 
     /**
@@ -23,7 +25,7 @@ class FlightController extends Controller
      */
     public function create()
     {
-        //
+        return view('flights.create');
     }
 
     /**
@@ -34,7 +36,20 @@ class FlightController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'airline' => 'required',
+            'number' => 'required',
+            'departure_airport' => 'required',
+            'departure_time' => 'required',
+            'arrival_airport' => 'required',
+            'duration' => 'required|numeric',
+            'price' => 'required|numeric',
+        ]);
+
+        Flight::create($data);
+
+        return redirect()->route('flights.index')->with('success', 'Flight created successfully.');
+
     }
 
     /**
@@ -45,7 +60,8 @@ class FlightController extends Controller
      */
     public function show($id)
     {
-        //
+        $flight = Flight::findOrFail($id);
+        return view('flights.show', compact('flight'));
     }
 
     /**
@@ -56,7 +72,8 @@ class FlightController extends Controller
      */
     public function edit($id)
     {
-        //
+        $flight = Flight::findOrFail($id);
+        return view('flights.edit', compact('flight'));
     }
 
     /**
@@ -68,7 +85,20 @@ class FlightController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'airline' => 'required',
+            'number' => 'required',
+            'departure_airport' => 'required',
+            'departure_time' => 'required',
+            'arrival_airport' => 'required',
+            'duration' => 'required|numeric',
+            'price' => 'required|numeric',
+        ]);
+
+        $flight = Flight::findOrFail($id);
+        $flight->update($data);
+
+        return redirect()->route('flights.index')->with('success', 'Flight updated successfully.');
     }
 
     /**
@@ -79,6 +109,9 @@ class FlightController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $flight = Flight::findOrFail($id);
+        $flight->delete();
+
+        return redirect()->route('flights.index')->with('success', 'Flight deleted successfully.');
     }
 }
