@@ -19,8 +19,8 @@ class CreateAirportsTable extends Migration
             $table->string('name');
             $table->string('city');
             $table->string('country_code');
-            $table->float('latitude');
-            $table->float('longitude');
+            $table->double('latitude');
+            $table->double('longitude');
             $table->string('timezone');
             $table->timestamps();
         });
