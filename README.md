@@ -32,14 +32,35 @@ Once the API is up and running, you can make requests to the available endpoints
 ## API Endpoints
 The FlightHub Trip Builder API provides the following endpoints:
 
-## GET /api/search: Search for trips based on the specified criteria.
+### GET /api/search: Search for trips based on the specified criteria.
 
 Sample Requests and Responses
 Search for Trips
 
 Request:
-## GET /api/search?origin=YUL&destination=YVR&trip_type=roundtrip
+### GET /api/search?origin=YUL&destination=YVR&trip_type=oneway
+Response:
+{
+	"trips": [{
+		"outbound": {
+			"id": 3,
+			"airline": "F8",
+			"number": "103",
+			"departure_airport": "YUL",
+			"departure_time": "22:00:00",
+			"arrival_airport": "YVR",
+			"duration": 330,
+			"price": "239.01",
+			"trip_id": null,
+			"created_at": "2023-05-19T07:24:53.000000Z",
+			"updated_at": "2023-05-19T07:24:53.000000Z"
+		}
+	}]
+}
 
+
+Request:
+### GET /api/search?origin=YUL&destination=YVR&trip_type=roundtrip
 Response:
 {
 	"trips": [{
