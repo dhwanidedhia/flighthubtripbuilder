@@ -1,5 +1,5 @@
 ## FlightHub Trip Builder
-This is a PHP-based web service that allows users to search for and retrieve information about flights and trips. The API provides functionalities to search for one-way and round trips, retrieve airline and airport information, and perform CRUD operations on flight and trip data.
+This is a PHP-based web service that allows users to search for and retrieve information about flights and trips. The API provides functionalities to search for one-way and round trips, retrieve airline and airport information, and perform CRUD operations on airline, airport and flight data.
 
 ## Installation
 
