@@ -8,7 +8,7 @@ git clone https://github.com/dhwanidedhia/flighthubtripbuilder
 2. Navigate to the project directory:
 cd flighthubtripbuilder
 
-3.Install the project dependencies using Composer:
+3. Install the project dependencies using Composer:
 composer install
 
 4. Edit the /app/config/database.php file to add the necessary database connection information.
