@@ -101,69 +101,74 @@ Airline, Flight number, Departure airport, Departure time, Arrival airport, Dura
 # API Endpoints
 The FlightHub Trip Builder API provides the following endpoints:
 
-##### GET /api/trips: Search for trips based on the specified criteria.
+#### GET /api/trips: Search for trips based on the specified criteria.
 
 Sample Requests and Responses
 Search for Trips
 
-**Request:**
-##### GET /api/trips?origin=YUL&destination=YVR&trip_type=oneway&filter_airline=&filter_duration=&filter_cost=&sort_by=cost&per_page=20&page=1
+### One Way Trip
+**Request:**  <br> 
+GET /api/trips?origin=YUL&destination=YVR&trip_type=oneway&filter_airline=&filter_duration=&filter_cost=&sort_by=cost&per_page=20&page=1 
+<br>
+
 **Response:**
 
 ```json
 
 {
-    "trips": [
-        {
-            "outbound": {
-                "id": 3,
-                "airline": "F8",
-                "number": "103",
-                "departure_airport": "YUL",
-                "departure_time": "22:00:00",
-                "arrival_airport": "YVR",
-                "duration": 330,
-                "price": "239.01"
-            }
-        }
-    ],
-    "total_distance":"3,681.74"
+  "trips": [
+    {
+      "outbound": {
+        "id": 1,
+        "airline": "AC",
+        "number": "301",
+        "departure_airport": "YUL",
+        "departure_time": "07:30:00",
+        "arrival_airport": "YVR",
+        "duration": 330,
+        "price": "600.31"
+      }
+    }
+  ],
+  "total_distance": "3,681.74"
 }
 ```
 
-**Request:**
-##### GET /api/trips?origin=YUL&destination=YVR&trip_type=roundtrip&filter_airline=&filter_duration=&filter_cost=&sort_by=cost&per_page=20&page=1
+### Round Trip <br>
+**Request:** <br>
+GET /api/trips?origin=YUL&destination=YVR&trip_type=roundtrip&filter_airline=&filter_duration=&filter_cost=&sort_by=cost&per_page=20&page=1 
+<br>
 
-**Response:**
+**Response:** <br>
 
 ```json
 
 {
-    "trips": [
-        {
-            "outbound": {
-                "id": 3,
-                "airline": "F8",
-                "number": "103",
-                "departure_airport": "YUL",
-                "departure_time": "22:00:00",
-                "arrival_airport": "YVR",
-                "duration": 330,
-                "price": "239.01"
-            },
-            "inbound": {
-                "id": 2,
-                "airline": "AC",
-                "number": "304",
-                "departure_airport": "YVR",
-                "departure_time": "08:55:00",
-                "arrival_airport": "YUL",
-                "duration": 277,
-                "price": "499.93",
-            }
-	    }
-    ],
-    "total_distance":"7,363.47"
+  "trips": [
+    {
+      "outbound": {
+        "id": 1,
+        "airline": "AC",
+        "number": "301",
+        "departure_airport": "YUL",
+        "departure_time": "07:30:00",
+        "arrival_airport": "YVR",
+        "duration": 330,
+        "price": "600.31"
+      },
+      "inbound": {
+        "id": 2,
+        "airline": "AC",
+        "number": "304",
+        "departure_airport": "YVR",
+        "departure_time": "08:55:00",
+        "arrival_airport": "YUL",
+        "duration": 277,
+        "price": "499.93"
+      }
+    }
+  ],
+  "total_distance": "7,363.47"
 }
 ```
 
