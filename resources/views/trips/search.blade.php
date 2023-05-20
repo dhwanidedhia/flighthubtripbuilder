@@ -30,7 +30,7 @@
 			<div class="form-group">
 				<select name="sort_by" class="form-control"  id="sort_by" onchange="applyFilters()">
 					<option value="">Select</option>
-					<option value="cost">Cost</option>
+					<option value="cost" selected>Cost</option>
 					<option value="duration">Duration</option>
 				</select>
 			</div>
@@ -44,8 +44,9 @@
 						<label>Filter by Airline:</label>
 						<select name="filter_airline" class="form-control" id="filter_airline" onchange="applyFilters()">
 							<option value="">Select Airline</option>
-							<option value="AC">Air Canada</option>
-							<option value="F8">Flair Airlines</option>
+							@foreach($airlines as $airline)
+							<option value="{{$airline['code']}}">{{$airline['code']}} - {{$airline['name']}}</option>
+							@endforeach
 						</select>
 					</div>
 				</div>
@@ -54,8 +55,8 @@
 						<label>Filter by Duration:</label>
 						<select name="filter_duration" class="form-control" id="filter_duration" onchange="applyFilters()">
 							<option value="">Select Duration</option>
-							@for ($i = 200; $i <= 700; $i += 6)
-							<option value="{{ $i }}">{{ $i }}</option>
+							@for ($i = 200; $i <= 1200; $i += 200)
+							<option value="{{ $i }}">less than {{ $i }}</option>
 							@endfor
 							
 						</select>
@@ -66,13 +67,10 @@
 						<label>Filter by Cost:</label>
 						<select name="filter_cost" class="form-control" id="filter_cost" onchange="applyFilters()">
 							<option value="">Select Cost</option>
-							<option value="500">500</option>
-							<option value="600">600</option>
-							<option value="800">800</option>
-							<option value="1000">1000</option>
-							<option value="1100">1100</option>
-							<option value="1200">1200</option>
-							<option value="1500">1500</option>
+							@for ($j = 200; $j <= 1200; $j += 200)
+							<option value="{{ $j }}">less than {{ $j }}</option>
+							@endfor
+							
 							
 						</select>
 					</div>

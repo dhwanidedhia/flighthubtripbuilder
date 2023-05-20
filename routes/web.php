@@ -7,6 +7,7 @@ use App\Http\Controllers\TripController;
 use App\Http\Controllers\AirlineController;
 use App\Http\Controllers\AirportController;
 use App\Http\Controllers\FlightController;
+use App\Models\Airline;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,8 @@ use App\Http\Controllers\FlightController;
 */
 
 Route::get('/', function () {
-    return view('trips.search');
+	$airlines = Airline::get()->toArray();
+    return view('trips.search',['airlines'=>$airlines]);
 });
 
 Route::resource('airlines', AirlineController::class);

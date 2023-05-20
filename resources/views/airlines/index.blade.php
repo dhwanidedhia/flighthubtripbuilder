@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h2>Airlines</h2>
+        <h1>Airlines</h1>
 		@if(session()->has('success'))
 			<div class="alert alert-success">
 				{{ session()->get('success') }}

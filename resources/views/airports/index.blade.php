@@ -17,7 +17,7 @@
                     <th>Latitude</th>
                     <th>Longitude</th>
                     <th>Timezone</th>
-                    <th>Action</th>
+                    <th WIDTH="250">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,7 +31,7 @@
                         <td>{{ $airport['latitude'] }}</td>
                         <td>{{ $airport['longitude'] }}</td>
                         <td>{{ $airport['timezone'] }}</td>
-                        <td>
+                        <td WIDTH="250">
                             <a href="{{ route('airports.show', $airport->id) }}" class="btn btn-primary btn-sm">View</a>
                             <a href="{{ route('airports.edit', $airport->id) }}" class="btn btn-warning btn-sm">Edit</a>
 							

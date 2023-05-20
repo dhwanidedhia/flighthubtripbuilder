@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Flight;
+use App\Models\Airline;
+use App\Models\Airport;
 use Illuminate\Support\Facades\Validator;
 
 class FlightController extends Controller
@@ -26,7 +28,10 @@ class FlightController extends Controller
      */
     public function create()
     {
-        return view('flights.create');
+		$airlines = Airline::get()->toArray();
+		$airports = Airport::get()->toArray();
+		
+        return view('flights.create',compact('airlines','airports'));
     }
 
     /**
@@ -80,7 +85,9 @@ class FlightController extends Controller
     public function edit($id)
     {
         $flight = Flight::findOrFail($id);
-        return view('flights.edit', compact('flight'));
+		$airlines = Airline::get()->toArray();
+		$airports = Airport::get()->toArray();
+        return view('flights.edit', compact('flight','airlines','airports'));
     }
 
     /**

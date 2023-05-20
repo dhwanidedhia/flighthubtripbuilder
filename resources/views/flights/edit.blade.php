@@ -20,7 +20,12 @@
 		
 		<div class="form-group">
 			<label for="airline">Airline:</label>
-			<input type="text" name="airline" id="airline" class="form-control" value="{{ $flight->airline }}">
+			<select name="airline" class="form-control" id="airline" required>
+				<option value="">Select Airline</option>
+				@foreach($airlines as $airline)
+				<option value="{{$airline['code']}}" @if($airline['code'] ==$flight->airline) selected @endif >{{$airline['code']}} - {{$airline['name']}}</option>
+				@endforeach
+			</select>
 		</div>
 		
 		<div class="form-group">
@@ -30,7 +35,13 @@
 		
 		<div class="form-group">
 			<label for="departure_airport">Departure Airport:</label>
-			<input type="text" name="departure_airport" id="departure_airport" class="form-control" value="{{ $flight->departure_airport }}">
+			<select name="departure_airport" class="form-control" id="departure_airport" required>
+				<option value="">Select Airport</option>
+				@foreach($airports as $airport)
+				<option value="{{$airport['code']}}" @if($airport['code'] ==$flight->departure_airport) selected @endif >{{$airport['code']}} - {{$airport['name']}}</option>
+				@endforeach
+			</select>
+		
 		</div>
 		
 		<div class="form-group">
@@ -40,7 +51,12 @@
 		
 		<div class="form-group">
 			<label for="arrival_airport">Arrival Airport:</label>
-			<input type="text" name="arrival_airport" id="arrival_airport" class="form-control" value="{{ $flight->arrival_airport }}">
+			<select name="arrival_airport" class="form-control" id="arrival_airport" required>
+				<option value="">Select Airport</option>
+				@foreach($airports as $airport)
+				<option value="{{$airport['code']}}" @if($airport['code'] ==$flight->arrival_airport) selected @endif >{{$airport['code']}} - {{$airport['name']}}</option>
+				@endforeach
+			</select>
 		</div>
 		
 		<div class="form-group">

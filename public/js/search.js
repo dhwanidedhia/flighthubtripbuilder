@@ -28,7 +28,7 @@ $(document).ready(function() {
 				var totalDistance = response.total_distance;
 				
                 // Display the search results on the page
-				$('#total-distance').html("<b>Total Distance:</b> "+totalDistance+" KM");
+				$('#total-distance').html("<b>Total Distance: </b>"+totalDistance+" KM");
                
             },
             error: function(xhr, status, error) {
@@ -96,12 +96,12 @@ function displayTrips(trips) {
 			var rowElement = $('<tr>');
 
 			// Add the outbound flight details
-			var outboundCell = $('<td>').html('Airline: ' + outboundFlight.airline + '<br>Flight: ' + outboundFlight.number + '<br>Cost: ' + outboundFlight.price + '<br>Duration: ' + outboundFlight.duration);
+			var outboundCell = $('<td>').html('Airline: ' + outboundFlight.airline + '<br>Flight: ' + outboundFlight.number + '<br>Cost: ' + outboundFlight.price + '<br>Duration: ' + outboundFlight.duration+ '<br>Departure Time: ' + outboundFlight.departure_time);
 			rowElement.append(outboundCell);
 
 			// Add the inbound flight details if present
 			if (inboundFlight) {
-				var inboundCell = $('<td>').html('Airline: ' + inboundFlight.airline + '<br>Flight: ' + inboundFlight.number + '<br>Cost: ' + inboundFlight.price + '<br>Duration: ' + inboundFlight.duration);
+				var inboundCell = $('<td>').html('Airline: ' + inboundFlight.airline + '<br>Flight: ' + inboundFlight.number + '<br>Cost: ' + inboundFlight.price + '<br>Duration: ' + inboundFlight.duration+ '<br>Departure Time: ' + inboundFlight.departure_time);
 				rowElement.append(inboundCell);
 			}
 

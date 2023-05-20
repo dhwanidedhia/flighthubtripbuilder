@@ -197,7 +197,7 @@ class TripController extends Controller
 		$trips = collect($trips);
 
 		// Paginate the trip results
-		$perPage = $request->input('per_page', 10); // Number of trips per page (default: 10)
+		$perPage = $request->input('per_page', 20); // Number of trips per page (default: 10)
 		$currentPage = $request->input('page', 1); // Current page (default: 1)
 		$paginatedTrips = new LengthAwarePaginator(
 			$trips->forPage($currentPage, $perPage),

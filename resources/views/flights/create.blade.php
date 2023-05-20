@@ -16,10 +16,16 @@
     <form action="{{ route('flights.store') }}" method="POST">
         @csrf
         <!-- Flight form fields -->
-        <div class="form-group">
-            <label for="airline">Airline</label>
-            <input type="text" name="airline" id="airline" class="form-control" required>
-        </div>
+        
+		<div class="form-group">
+			<label for="airline">Airline</label>
+			<select name="airline" class="form-control" id="airline" required>
+				<option value="">Select Airline</option>
+				@foreach($airlines as $airline)
+				<option value="{{$airline['code']}}">{{$airline['code']}} - {{$airline['name']}}</option>
+				@endforeach
+			</select>
+		</div>
 
         <div class="form-group">
             <label for="number">Flight Number</label>
@@ -27,8 +33,13 @@
         </div>
 
         <div class="form-group">
-            <label for="departure_airport">Departure Airport</label>
-            <input type="text" name="departure_airport" id="departure_airport" class="form-control" required>
+			<label for="departure_airport">Departure Airport</label>
+			<select name="departure_airport" class="form-control" id="departure_airport" required>
+				<option value="">Select Airport</option>
+				@foreach($airports as $airport)
+				<option value="{{$airport['code']}}">{{$airport['code']}} - {{$airport['name']}}</option>
+				@endforeach
+			</select>
         </div>
 
         <div class="form-group">
@@ -38,7 +49,12 @@
 
         <div class="form-group">
             <label for="arrival_airport">Arrival Airport</label>
-            <input type="text" name="arrival_airport" id="arrival_airport" class="form-control" required>
+			<select name="arrival_airport" class="form-control" id="arrival_airport" required>
+				<option value="">Select Airport</option>
+				@foreach($airports as $arrival_airport)
+				<option value="{{$arrival_airport['code']}}">{{$arrival_airport['code']}} - {{$arrival_airport['name']}}</option>
+				@endforeach
+			</select>
         </div>
 
         <div class="form-group">
