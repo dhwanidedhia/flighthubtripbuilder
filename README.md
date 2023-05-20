@@ -65,8 +65,10 @@ Users can filter the search results by selecting a maximum duration from the dro
 Users can filter the search results by selecting a maximum cost from the dropdown menu. Only flights with a cost less than or equal to the selected value will be displayed.
 
 ### Displaying Search Results
-Each flight will be listed outbound/inbound with the following details:
+Search results are cached. Each flight will be listed outbound/inbound based on trip type with the following details:
 Airline, Flight number, Departure airport, Departure time, Arrival airport, Duration, Price
+Also total distance from origin to destination will be displayed
+
 #### One Way Trip
 ![image](https://github.com/dhwanidedhia/flighthubtripbuilder/assets/16332681/ff011cce-7eeb-4a04-ab10-48b1eabf2dbc)
 
@@ -101,7 +103,7 @@ Airline, Flight number, Departure airport, Departure time, Arrival airport, Dura
 
 
 # API Endpoints
-The FlightHub Trip Builder API provides the following endpoints:
+The FlightHub Trip Builder RESTFUL API provides the following endpoints:
 
 #### GET /api/trips: Search for trips based on the specified criteria.
 
