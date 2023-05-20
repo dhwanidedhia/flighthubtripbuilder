@@ -219,7 +219,7 @@ class TripController extends Controller
 		}
 		
 		// Return the matching trips as a JSON response
-		return response()->json(['trips' => $trips,'total_distance'=>$total_distance]);
+		return response()->json(['trips' => $trips,'total_distance'=>$total_distance], 201);
 
     }
 	
