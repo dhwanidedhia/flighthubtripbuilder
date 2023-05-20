@@ -67,9 +67,10 @@ Users can filter the search results by selecting a maximum cost from the dropdow
 ### Displaying Search Results
 Each flight will be listed outbound/inbound with the following details:
 Airline, Flight number, Departure airport, Departure time, Arrival airport, Duration, Price
-
+#### One Way Trip
 ![image](https://github.com/dhwanidedhia/flighthubtripbuilder/assets/16332681/ff011cce-7eeb-4a04-ab10-48b1eabf2dbc)
 
+#### Round Trip
 ![image](https://github.com/dhwanidedhia/flighthubtripbuilder/assets/16332681/96b06452-ff55-4d9a-b334-b2da74793f0c)
 
 ## CRUD Operation <br>
