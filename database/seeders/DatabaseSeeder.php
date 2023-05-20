@@ -27,6 +27,10 @@ class DatabaseSeeder extends Seeder
                 'code' => 'F8',
                 'name' => 'Flair Airlines',
             ],
+			[
+                'code' => 'WS',
+                'name' => 'Westjet',
+            ],
         ];
 
         foreach ($airlines as $airline) {
@@ -100,6 +104,24 @@ class DatabaseSeeder extends Seeder
                 'duration' => 270,
                 'price' => '259.23',
             ],
+			[
+                'airline' => 'WS',
+                'number' => '589',
+                'departure_airport' => 'YUL',
+                'departure_time' => '08:15',
+                'arrival_airport' => 'YVR',
+                'duration' => 332,
+                'price' => '459.58',
+            ],
+            [
+                'airline' => 'WS',
+                'number' => '564',
+                'departure_airport' => 'YVR',
+                'departure_time' => '23:20',
+                'arrival_airport' => 'YUL',
+                'duration' => 295,
+                'price' => '167.39',
+            ]
         ];
 
         foreach ($flights as $flight) {
