@@ -109,58 +109,61 @@ Search for Trips
 **Request:**
 ##### GET /api/trips?origin=YUL&destination=YVR&trip_type=oneway&filter_airline=&filter_duration=&filter_cost=&sort_by=cost&per_page=20&page=1
 **Response:**
-{
-	"trips": [{
-		"outbound": {
-			"id": 3,
-			"airline": "F8",
-			"number": "103",
-			"departure_airport": "YUL",
-			"departure_time": "22:00:00",
-			"arrival_airport": "YVR",
-			"duration": 330,
-			"price": "239.01",
-			"trip_id": null,
-			"created_at": "2023-05-19T07:24:53.000000Z",
-			"updated_at": "2023-05-19T07:24:53.000000Z"
-		}
-	}]
-}
 
+```json
+
+{
+    "trips": [
+        {
+            "outbound": {
+                "id": 3,
+                "airline": "F8",
+                "number": "103",
+                "departure_airport": "YUL",
+                "departure_time": "22:00:00",
+                "arrival_airport": "YVR",
+                "duration": 330,
+                "price": "239.01"
+            }
+        }
+    ],
+    "total_distance":"3,681.74"
+}
+```
 
 **Request:**
 ##### GET /api/trips?origin=YUL&destination=YVR&trip_type=roundtrip&filter_airline=&filter_duration=&filter_cost=&sort_by=cost&per_page=20&page=1
 
 **Response:**
-{
-	"trips": [{
-		"outbound": {
-			"id": 3,
-			"airline": "F8",
-			"number": "103",
-			"departure_airport": "YUL",
-			"departure_time": "22:00:00",
-			"arrival_airport": "YVR",
-			"duration": 330,
-			"price": "239.01",
-			"trip_id": null,
-			"created_at": "2023-05-19T07:24:53.000000Z",
-			"updated_at": "2023-05-19T07:24:53.000000Z"
-		},
-		"inbound": {
-			"id": 2,
-			"airline": "AC",
-			"number": "304",
-			"departure_airport": "YVR",
-			"departure_time": "08:55:00",
-			"arrival_airport": "YUL",
-			"duration": 277,
-			"price": "499.93",
-			"trip_id": null,
-			"created_at": "2023-05-19T07:24:53.000000Z",
-			"updated_at": "2023-05-19T07:24:53.000000Z"
-		}
-	}]
-}
 
+```json
+
+{
+    "trips": [
+        {
+            "outbound": {
+                "id": 3,
+                "airline": "F8",
+                "number": "103",
+                "departure_airport": "YUL",
+                "departure_time": "22:00:00",
+                "arrival_airport": "YVR",
+                "duration": 330,
+                "price": "239.01"
+            },
+            "inbound": {
+                "id": 2,
+                "airline": "AC",
+                "number": "304",
+                "departure_airport": "YVR",
+                "departure_time": "08:55:00",
+                "arrival_airport": "YUL",
+                "duration": 277,
+                "price": "499.93",
+            }
+	    }
+    ],
+    "total_distance":"7,363.47"
+}
+```
 
