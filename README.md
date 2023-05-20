@@ -38,22 +38,23 @@ The trip search feature allows users to search for flights based on their origin
 <br>
 ![image](https://github.com/dhwanidedhia/flighthubtripbuilder/assets/16332681/bfa1cec7-0ace-4a0b-9860-3bbdc80a5bff)
 
-#### Search Form <br>
+### Search Form <br>
 The search form contains the following fields:
 <br>
 1. **Origin:** Text input field where users can enter the origin airport code.
 2. **Destination:** Text input field where users can enter the destination airport code.
 3. **Trip Type:** Dropdown menu where users can select either "One Way" or "Round Trip".
-<br>Search Button: Button to submit the search form.
 
-#### Sort and Filter Results
+**Search Button:** Button to submit the search form.
+
+### Sort and Filter Results
 Once the search form is submitted, the search results will be displayed along with sorting and filtering options. The sorting options allow users to sort the search results by cost or duration. The filtering options allow users to filter the results by airline, duration, and cost.
 
-##### Sort by
+**Sort by**
 1. **Cost:** Sorts the search results by the cost of the flights, from lowest to highest.
 2. **Duration:** Sorts the search results by the duration of the flights, from shortest to longest.
 
-##### Filter
+**Filter**
 1. **Filter by Airline**
 Users can filter the search results by selecting a specific airline from the dropdown menu. Only flights from the selected airline will be displayed.
 
@@ -63,7 +64,7 @@ Users can filter the search results by selecting a maximum duration from the dro
 3. **Filter by Cost**
 Users can filter the search results by selecting a maximum cost from the dropdown menu. Only flights with a cost less than or equal to the selected value will be displayed.
 
-**Displaying Search Results** <br>
+### Displaying Search Results
 Each flight will be listed outbound/inbound with the following details:
 Airline, Flight number, Departure airport, Departure time, Arrival airport, Duration, Price
 
