@@ -18,7 +18,7 @@ class SearchControllerTest extends TestCase
     public function testSearch()
     {
         // Create a mock request object with the necessary input
-        $request = \Illuminate\Http\Request::create('/search', 'POST', [
+        $request = \Illuminate\Http\Request::create('/search', 'GET', [
             'origin' => 'YUL',
             'destination' => 'YVR',
             'trip_type' => 'oneway',
