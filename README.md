@@ -19,12 +19,16 @@ cd flighthubtripbuilder
 3. Install the project dependencies using Composer: <br>
 composer install
 
-4. Edit the /app/config/database.php file to add the necessary database connection information.
+4. Copy the example environment file: cp .env.example .env
 
-5. Run the database migrations to create the required tables: <br>
+5. Generate an application key: php artisan key:generate
+
+6. Configure the database connection in the .env file.
+ 
+7. Run the database migrations to create the required tables: <br>
 php artisan migrate
 
-6. Seed the database with sample data: <br>
+8. Seed the database with sample data: <br>
 php artisan db:seed
 
 7. Start the development server: <br>
@@ -175,4 +179,8 @@ GET /api/trips?origin=YUL&destination=YVR&trip_type=roundtrip&filter_airline=&fi
   "total_distance": "7,363.47"
 }
 ```
+
+# Testing
+Tried implementing automated software tests using PHPUnit
+
 
