@@ -21,8 +21,8 @@ class TripController extends Controller
 		//echo "<pre>";print_r($request->all());die;
 		// Validate the search criteria
 		$validator = \Validator::make($request->all(), [
-			'origin' => 'required|string',
-			'destination' => 'required|string',
+			'origin' => 'required|string|exists:airports,code',
+			'destination' => 'required|string|exists:airports,code|different:origin',
 			'trip_type' => 'nullable|string|in:oneway,roundtrip',
 		]);
 

@@ -9,7 +9,7 @@ class Flight extends Model
 {
     use HasFactory;
 	
-	protected $fillable = ['airline', 'number', 'departure_airport', 'departure_time', 'arrival_airport', 'duration', 'price','trip_id'];
+	protected $fillable = ['airline', 'number', 'departure_airport', 'departure_time', 'arrival_airport', 'duration', 'price'];
 	
 	/**
      * Get the airline of the flight.
