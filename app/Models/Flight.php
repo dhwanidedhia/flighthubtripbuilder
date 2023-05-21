@@ -34,12 +34,4 @@ class Flight extends Model
     {
         return $this->belongsTo(Airport::class, 'arrival_airport', 'code');
     }
-	
-	/**
-     * Get the trip associated with the flight.
-     */
-    public function trip()
-    {
-        return $this->belongsTo(Trip::class);
-    }
 }
