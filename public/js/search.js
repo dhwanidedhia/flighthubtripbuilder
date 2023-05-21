@@ -32,6 +32,7 @@ $(document).ready(function() {
                
             },
             error: function(xhr, status, error) {
+				$('#sort-filter-results').hide();
                 if (xhr.status === 400) {
                     var errors = xhr.responseJSON.errors;
                     // Display validation errors to the user

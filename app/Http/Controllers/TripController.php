@@ -59,12 +59,10 @@ class TripController extends Controller
 			Cache::put($cacheKey, $trips, 60);
 		}
 		
-		// Convert the array into a collection
 		$trips = collect($trips);
 		
-
 		// Apply filtering
-		//Airlines
+		//Filter by Airlines
 		if ($filterAirline) {
 			$trips = $trips->filter(function ($trip) use ($filterAirline) {
 				$outboundFlight = $trip['outbound'];
@@ -78,8 +76,7 @@ class TripController extends Controller
 			});
 		}
 		
-		//Duration
-		// Convert the sorted collection back to an array
+		//Filter by Duration
 		$trips = $trips->values()->all();
 		if ($filterDuration) {
 			$trips = array_filter($trips, function ($trip) use ($filterDuration) {
@@ -89,7 +86,8 @@ class TripController extends Controller
 				return $totalDuration <= $filterDuration;
 			});
 		}
-
+		
+		//Filter by Cost
 		if ($filterCost) {
 			$trips = array_filter($trips, function ($trip) use ($filterCost) {
 				$outboundPrice = $trip['outbound']['price'];
@@ -99,27 +97,26 @@ class TripController extends Controller
 			});
 		}
 		
-		//Cost
-		// Convert the array into a collection
+		
 		$trips = collect($trips);
-		//sort by price or duration
+		
+		//Apply Sorting 
 		if ($sortBy === 'cost') {
+			//Sort by cost
 			$trips = $trips->sortBy(function ($trip) {
 				return $trip['outbound']->price + (isset($trip['inbound']) ? $trip['inbound']->price : 0);
 			});
 		} elseif ($sortBy === 'duration') {
+			//Sort by duration
 			$trips = $trips->sortBy(function ($trip) {
 				return $trip['outbound']->duration + (isset($trip['inbound']) ? $trip['inbound']->duration : 0);
 			});
 		}
 		
-		// Convert the collection back to an array
 		$trips = $trips->values()->all();
 
 		//Pagination
-		// Convert the array into a collection
 		$trips = collect($trips);
-
 		// Paginate the trip results
 		$perPage = $request->input('per_page', 20); // Number of trips per page (default: 10)
 		$currentPage = $request->input('page', 1); // Current page (default: 1)
@@ -132,7 +129,7 @@ class TripController extends Controller
 		);
 
 		$trips = $paginatedTrips;
-		// Convert the collection back to an array
+		
 		$trips = $trips->values()->all();
 		
 		//Calculate distance
