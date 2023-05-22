@@ -18,7 +18,6 @@ class TripController extends Controller
      */
 	public function search(Request $request)
     {
-		//echo "<pre>";print_r($request->all());die;
 		// Validate the search criteria
 		$validator = \Validator::make($request->all(), [
 			'origin' => 'required|string|exists:airports,code',

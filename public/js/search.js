@@ -97,12 +97,12 @@ function displayTrips(trips) {
 			var rowElement = $('<tr>');
 
 			// Add the outbound flight details
-			var outboundCell = $('<td>').html('Airline: ' + outboundFlight.airline + '<br>Flight: ' + outboundFlight.number + '<br>Cost: ' + outboundFlight.price + '<br>Duration: ' + outboundFlight.duration+ '<br>Departure Time: ' + outboundFlight.departure_time);
+			var outboundCell = $('<td>').html('Airline: ' + outboundFlight.airline + '<br>Flight: ' + outboundFlight.number + '<br>Cost: ' + outboundFlight.price + '<br>Duration: ' + outboundFlight.duration+ '<br>Departure Time: ' + outboundFlight.departure_time+ '<br>Departure Airport: ' + outboundFlight.departure_airport+ '<br>Arrival Airport: ' + outboundFlight.arrival_airport);
 			rowElement.append(outboundCell);
 
 			// Add the inbound flight details if present
 			if (inboundFlight) {
-				var inboundCell = $('<td>').html('Airline: ' + inboundFlight.airline + '<br>Flight: ' + inboundFlight.number + '<br>Cost: ' + inboundFlight.price + '<br>Duration: ' + inboundFlight.duration+ '<br>Departure Time: ' + inboundFlight.departure_time);
+				var inboundCell = $('<td>').html('Airline: ' + inboundFlight.airline + '<br>Flight: ' + inboundFlight.number + '<br>Cost: ' + inboundFlight.price + '<br>Duration: ' + inboundFlight.duration+ '<br>Departure Time: ' + inboundFlight.departure_time+ '<br>Departure Airport: ' + inboundFlight.departure_airport+ '<br>Arrival Airport: ' + inboundFlight.arrival_airport);
 				rowElement.append(inboundCell);
 			}
 
