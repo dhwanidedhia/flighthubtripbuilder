@@ -74,7 +74,7 @@ Airline, Flight number, Departure airport, Departure time, Arrival airport, Dura
 Also total distance from origin to destination will be displayed
 
 #### One Way Trip
-![image](https://github.com/dhwanidedhia/flighthubtripbuilder/assets/16332681/ff011cce-7eeb-4a04-ab10-48b1eabf2dbc)
+![image](https://github.com/dhwanidedhia/flighthubtripbuilder/assets/16332681/591fb35b-e680-4f08-8594-8a7edd7d43df)
 
 #### Round Trip
 ![image](https://github.com/dhwanidedhia/flighthubtripbuilder/assets/16332681/96b06452-ff55-4d9a-b334-b2da74793f0c)
